@@ -1,0 +1,45 @@
+name: viperos-checks
+
+# The fork's only enabled workflow.
+# Upstream workflows stay in the tree but are disabled at the repository level
+# (xSnakepit/viperos: scripts/disable-upstream-workflows.sh). Re-run that script
+# after every upstream sync so newly introduced upstream workflows stay off.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  PRIMARY_NODE_VERSION: "22.x"
+  PNPM_VERSION: "9.15.0"
+  BB_TELEMETRY: "false"
+
+concurrency:
+  group: viperos-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Fork checks (setup + plugin fork boundary)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup workspace
+        uses: ./.github/actions/setup-workspace
+        with:
+          node-version: ${{ env.PRIMARY_NODE_VERSION }}
+          pnpm-version: ${{ env.PNPM_VERSION }}
+          cache-prefix: viperos-checks
+      - name: Check source files for literal NUL bytes
+        run: node scripts/check-source-nul.mjs
+      - name: Plugin fork boundary
+        timeout-minutes: 80
+        run: pnpm check:plugin-forks
+      # Extend once the baseline is proven (tracked as FU-15): typecheck / lint / tests.
