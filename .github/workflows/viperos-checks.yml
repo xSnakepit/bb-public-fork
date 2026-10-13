@@ -45,5 +45,7 @@ jobs:
         run: node scripts/check-source-nul.mjs
       - name: Plugin fork boundary
         timeout-minutes: 80
-        run: pnpm check:plugin-forks
+        # Concurrency 1: provider-pi's bridge suites are spawn-timing tests on a 5s
+        # vitest budget; cross-plugin load on a standard runner flakes them.
+        run: pnpm check:plugin-forks --concurrency=1
       # Extend once the baseline is proven (tracked as FU-15): typecheck / lint / tests.
