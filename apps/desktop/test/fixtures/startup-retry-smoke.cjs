@@ -4,7 +4,7 @@ const { writeFile } = require("node:fs/promises");
 const { join } = require("node:path");
 const { app, ipcMain } = require("electron");
 
-app.setName("bb-dev");
+app.setName("viperos-dev");
 
 const desktopRoot = process.env.BB_STARTUP_SMOKE_APP_PATH;
 app.setVersion(require(join(desktopRoot, "package.json")).version);

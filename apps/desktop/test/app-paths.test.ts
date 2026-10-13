@@ -10,28 +10,28 @@ import {
 describe("desktop app paths", () => {
   it("resolves the packaged bb-app bridge beside the active asar", () => {
     const paths: DesktopPathContext = {
-      appPath: "/Applications/bb.app/Contents/Resources/app.asar",
+      appPath: "/Applications/ViperOS.app/Contents/Resources/app.asar",
       isPackaged: true,
-      resourcesPath: "/Applications/bb.app/Contents/Resources",
+      resourcesPath: "/Applications/ViperOS.app/Contents/Resources",
     };
 
     expect(resolveDesktopBridgePath({ paths })).toBe(
       normalize(
-        "/Applications/bb.app/Contents/Resources/app.asar.unpacked/dist/bb-app-bridge.mjs",
+        "/Applications/ViperOS.app/Contents/Resources/app.asar.unpacked/dist/bb-app-bridge.mjs",
       ),
     );
   });
 
   it("resolves the universal packaged bb-app bridge beside the selected arch asar", () => {
     const paths: DesktopPathContext = {
-      appPath: "/Applications/bb.app/Contents/Resources/app-arm64.asar",
+      appPath: "/Applications/ViperOS.app/Contents/Resources/app-arm64.asar",
       isPackaged: true,
-      resourcesPath: "/Applications/bb.app/Contents/Resources",
+      resourcesPath: "/Applications/ViperOS.app/Contents/Resources",
     };
 
     expect(resolveDesktopBridgePath({ paths })).toBe(
       normalize(
-        "/Applications/bb.app/Contents/Resources/app-arm64.asar.unpacked/dist/bb-app-bridge.mjs",
+        "/Applications/ViperOS.app/Contents/Resources/app-arm64.asar.unpacked/dist/bb-app-bridge.mjs",
       ),
     );
   });
@@ -39,20 +39,20 @@ describe("desktop app paths", () => {
   it("resolves the machine installer inside the bb-app package beside the bridge", () => {
     expect(
       resolveDesktopMachineInstallerPath(
-        "/Applications/bb.app/Contents/Resources/app.asar.unpacked/dist/bb-app-bridge.mjs",
+        "/Applications/ViperOS.app/Contents/Resources/app.asar.unpacked/dist/bb-app-bridge.mjs",
       ),
     ).toBe(
       normalize(
-        "/Applications/bb.app/Contents/Resources/app.asar.unpacked/node_modules/bb-app/server/dist/assets/install-machine.sh",
+        "/Applications/ViperOS.app/Contents/Resources/app.asar.unpacked/node_modules/bb-app/server/dist/assets/install-machine.sh",
       ),
     );
   });
 
   it("uses the release-specific icon inside packaged apps", () => {
     const paths: DesktopPathContext = {
-      appPath: "/Applications/bb Nightly.app/Contents/Resources/app.asar",
+      appPath: "/Applications/ViperOS Nightly.app/Contents/Resources/app.asar",
       isPackaged: true,
-      resourcesPath: "/Applications/bb Nightly.app/Contents/Resources",
+      resourcesPath: "/Applications/ViperOS Nightly.app/Contents/Resources",
     };
 
     expect(
@@ -62,7 +62,7 @@ describe("desktop app paths", () => {
       }),
     ).toBe(
       normalize(
-        "/Applications/bb Nightly.app/Contents/Resources/app.asar/assets/icon-nightly.png",
+        "/Applications/ViperOS Nightly.app/Contents/Resources/app.asar/assets/icon-nightly.png",
       ),
     );
   });

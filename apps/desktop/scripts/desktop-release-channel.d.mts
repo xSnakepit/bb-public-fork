@@ -8,15 +8,15 @@ export interface DesktopUpdateMetadataFileNames {
 }
 
 export interface DesktopReleaseConfig {
-  appId: "dev.bb.desktop" | "dev.bb.desktop.nightly";
-  applicationName: "bb" | "bb Nightly";
+  appId: "dev.viperos.desktop" | "dev.viperos.desktop.nightly";
+  applicationName: "ViperOS" | "ViperOS Nightly";
   artifactName: string;
   iconFileName: "icon.png" | "icon-nightly.png";
-  linuxExecutableName: "bb" | "bb-nightly";
+  linuxExecutableName: "viperos" | "viperos-nightly";
   macIconPath: "assets/icon.icns" | "assets/icon-nightly.icns";
   releaseTag: "desktop-latest" | "desktop-nightly";
   updateMetadataFileNames: DesktopUpdateMetadataFileNames;
-  windowsInstallName: "bb" | "bb-nightly";
+  windowsInstallName: "viperos" | "viperos-nightly";
 }
 
 export function resolveDesktopReleaseChannel(

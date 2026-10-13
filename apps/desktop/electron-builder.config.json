@@ -1,6 +1,6 @@
 {
-  "appId": "dev.bb.desktop",
-  "productName": "bb",
+  "appId": "dev.viperos.desktop",
+  "productName": "ViperOS",
   "artifactName": "${productName}-${version}-${arch}.${ext}",
   "toolsets": {
     "appimage": "1.0.3"
@@ -33,7 +33,7 @@
     {
       "channel": "latest",
       "provider": "generic",
-      "url": "https://github.com/get-bb/bb/releases/download/desktop-latest/"
+      "url": "https://github.com/xSnakepit/bb/releases/download/desktop-latest/"
     }
   ],
   "mac": {
@@ -59,7 +59,7 @@
   },
   "linux": {
     "category": "Development",
-    "executableName": "bb",
+    "executableName": "viperos",
     "icon": "assets/icon.png",
     "target": [{ "target": "AppImage", "arch": ["x64"] }]
   },

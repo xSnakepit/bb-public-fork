@@ -126,7 +126,7 @@ verification without opening a desktop window:
 
 ```bash
 pnpm exec turbo run smoke:packaged-npm --filter=@bb/desktop
-pnpm exec turbo run smoke:packaged-npm --filter=@bb/desktop -- /absolute/path/to/bb.app/Contents/MacOS/bb
+pnpm exec turbo run smoke:packaged-npm --filter=@bb/desktop -- /absolute/path/to/ViperOS.app/Contents/MacOS/ViperOS
 ```
 
 On Linux, the optional argument is the executable inside `linux-unpacked/` or
@@ -158,8 +158,8 @@ pnpm exec turbo run desktop:build:win --filter=@bb/desktop
 pnpm exec turbo run smoke:packaged --filter=@bb/desktop
 ```
 
-`desktop:build:win` writes `release/bb-<version>-x64.exe`, a one-click per-user
-NSIS installer that installs to `%LOCALAPPDATA%\Programs\bb` (`bb-nightly` on
+`desktop:build:win` writes `release/ViperOS-<version>-x64.exe`, a one-click per-user
+NSIS installer that installs to `%LOCALAPPDATA%\Programs\viperos` (`viperos-nightly` on
 the nightly channel) without elevation, plus `latest.yml` for electron-updater.
 Without a signing certificate the installer is unsigned, so Windows SmartScreen
 warns before running it. electron-builder signs it when `WIN_CSC_LINK` (a
@@ -198,7 +198,7 @@ Linux users whose window manager supplies all window controls can remove the
 native Electron title bar with `--no-window-frame`:
 
 ```bash
-./bb-x86_64.AppImage --no-window-frame
+./ViperOS-x86_64.AppImage --no-window-frame
 ```
 
 The native frame remains the default. Changing this startup option requires a
@@ -208,7 +208,7 @@ Linux users can opt into a transparent Electron window with
 `--transparent-window`:
 
 ```bash
-./bb-x86_64.AppImage --transparent-window
+./ViperOS-x86_64.AppImage --transparent-window
 ```
 
 The window remains opaque by default. Transparency also requires a compositor
@@ -301,11 +301,11 @@ nightly channel stays below `latest` until the next scheduled run.
 
 The nightly desktop is a separate installation:
 
-- product name: `bb Nightly`
-- bundle identifier: `dev.bb.desktop.nightly`
-- Linux binary name: `bb-nightly`, so it never shadows stable `bb` on PATH
+- product name: `ViperOS Nightly`
+- bundle identifier: `dev.viperos.desktop.nightly`
+- Linux binary name: `viperos-nightly`, so it never shadows stable `viperos` on PATH
 - app/update release: `desktop-nightly`
-- Windows install directory: `%LOCALAPPDATA%\Programs\bb-nightly`
+- Windows install directory: `%LOCALAPPDATA%\Programs\viperos-nightly`
 - update metadata: `nightly-mac.yml`, `nightly-linux.yml`, and `nightly.yml`
   (Windows)
 - version feeds: `desktop-version.json` (macOS),
@@ -314,7 +314,7 @@ The nightly desktop is a separate installation:
 - icon: `assets/icon-nightly.icns` and `assets/icon-nightly.png`
 
 Download it from
-[`desktop-nightly`](https://github.com/get-bb/bb/releases/tag/desktop-nightly)
+[`desktop-nightly`](https://github.com/xSnakepit/bb/releases/tag/desktop-nightly)
 or run the CLI build with:
 
 ```bash
@@ -389,7 +389,7 @@ while the Electron updater only flips the toast to "ready to install" after a
 signed update has actually downloaded. Local dev builds skip Electron auto-update
 unless `BB_DESKTOP_AUTO_UPDATE=1` is set.
 
-`bb Nightly` follows the equivalent isolated `desktop-nightly` release and
+`ViperOS Nightly` follows the equivalent isolated `desktop-nightly` release and
 `nightly-mac.yml`; it never reads or moves the stable feed. The scheduled
 workflow requires the complete signing/notarization secret set before
 publishing nightly desktop assets.
